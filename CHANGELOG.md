@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased]
+
+### Changed
+
+- **`ethers` peer dependency raised to `^6.17.0`** — ethers 6.16 pulls a `ws` release with two high-severity advisories (GHSA-58qx-3vcg-4xpx, GHSA-96hv-2xvq-fx4p); 6.17 ships the fixed `ws`.
+- **Tooling updated to the latest stable releases** — vitest 5, tsup 9, TypeScript 6.0, ESLint 10.13, typescript-eslint 8.72, Prettier 3.9. `npm audit` reports 0 vulnerabilities. CI now runs on Node 22 (vitest 5 requires Node ≥ 22.12); the published package still supports Node ≥ 18.
+
+---
+
 ## [1.1.1] - 2026-04-07
 
 ### Added
