@@ -863,6 +863,16 @@ describe("EnergyQuery", () => {
       expect(body.variables.where).toMatchObject({ project: "3" });
     });
 
+    it("queries several projects at once with an array of ids", async () => {
+      const fetch = mockFetch({ projectAttesters: [] });
+      vi.stubGlobal("fetch", fetch);
+
+      await makeQuery().getProjectAttesters(["2", "3"]);
+
+      const body = JSON.parse(fetch.mock.calls[0][1].body);
+      expect(body.variables.where).toEqual({ project_in: ["2", "3"] });
+    });
+
     it("passes active filter", async () => {
       const fetch = mockFetch({ projectAttesters: [] });
       vi.stubGlobal("fetch", fetch);

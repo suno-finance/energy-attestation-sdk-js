@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **`projectIds` filter on `AttestationFilters`** — query the attestations of several projects (e.g. every project of a watcher) in one request instead of one request per project. Maps to the subgraph's `project_in`.
+- **`getProjectAttesters` accepts an array of project ids** — one request (`project_in`) for the attesters of several projects.
 - **`DailySnapshotFilters.projectId` is optional** — omit it to get every project's snapshots in one paginated query, for protocol-wide charts. The query already worked without it at runtime; only the type required it.
 
 ### Fixed

@@ -511,14 +511,17 @@ export class EnergyQuery {
   // Attesters
   // ---------------------------------------------------------------------------
 
-  /** Returns the list of attesters authorized for a specific project. */
+  /** Returns the attesters authorized for a project, or for several projects when given an array of ids. */
   async getProjectAttesters(
-    projectId: string,
+    projectId: string | string[],
     filters: AttesterFilters = {},
   ): Promise<SubgraphProjectAttester[]> {
     const { first = 100, skip = 0, active } = filters;
 
-    const where: Record<string, unknown> = { project: projectId };
+    // An array queries several projects in one request (project_in).
+    const where: Record<string, unknown> = Array.isArray(projectId)
+      ? { project_in: projectId }
+      : { project: projectId };
     if (active !== undefined) where["active"] = active;
 
     const data = await this.query<{

@@ -857,10 +857,10 @@ console.log(data.fromTimestamp); // 1700000000n
 
 #### Attesters
 
-| Method                                     | Returns                     | Description                                 |
-| ------------------------------------------ | --------------------------- | ------------------------------------------- |
-| `getProjectAttesters(projectId, filters?)` | `SubgraphProjectAttester[]` | Attesters authorized for a specific project |
-| `getWatcherAttesters(watcherId, filters?)` | `SubgraphWatcherAttester[]` | Attesters authorized at the watcher level   |
+| Method                                     | Returns                     | Description                                                                                |
+| ------------------------------------------ | --------------------------- | ------------------------------------------------------------------------------------------ |
+| `getProjectAttesters(projectId, filters?)` | `SubgraphProjectAttester[]` | Attesters authorized for a project; pass an array of ids for several projects in one query |
+| `getWatcherAttesters(watcherId, filters?)` | `SubgraphWatcherAttester[]` | Attesters authorized at the watcher level                                                  |
 
 Both accept an optional `AttesterFilters` with `{ first?, skip?, active? }`.
 
