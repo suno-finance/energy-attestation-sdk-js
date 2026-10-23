@@ -36,7 +36,7 @@ const NETWORK_CONFIG: Record<Network, NetworkConfig> = {
     schemaRegistry: "0x23c5701A1BDa89C61d181BD79E5203c730708AE7",
     registry: "0x059D4655941204cf6aaC1cF578Aa9dc5D3ed6B39",
     schemaUID: "0x4673141c77c3d54962edf6ef7f25a0c62656f9bd08138b4c4f9561413c235435",
-    defaultRpcUrl: "https://rpc-amoy.polygon.technology",
+    defaultRpcUrl: "https://polygon-amoy-bor-rpc.publicnode.com",
     subgraphUrl:
       "https://gateway.thegraph.com/api/subgraphs/id/33b8nJcqxLyH96eSyyHC9vsdvHifUXejLzMEtqLeySBC",
     chainId: 80002,

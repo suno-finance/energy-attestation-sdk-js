@@ -24,7 +24,7 @@ describe("getNetworkConfig", () => {
     expect(config.schemaUID).toBe(
       "0x4673141c77c3d54962edf6ef7f25a0c62656f9bd08138b4c4f9561413c235435",
     );
-    expect(config.defaultRpcUrl).toBe("https://rpc-amoy.polygon.technology");
+    expect(config.defaultRpcUrl).toBe("https://polygon-amoy-bor-rpc.publicnode.com");
     expect(config.schemaRegistry).toBeTruthy();
   });
 

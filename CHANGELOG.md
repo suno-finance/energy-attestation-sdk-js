@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] - 2026-10-23
+
+### Added
+
+- **`projectIds` filter on `AttestationFilters`** — query the attestations of several projects (e.g. every project of a watcher) in one request instead of one request per project. Maps to the subgraph's `project_in`.
+- **`getProjectAttesters` accepts an array of project ids** — one request (`project_in`) for the attesters of several projects.
+- **`DailySnapshotFilters.projectId` is optional** — omit it to get every project's snapshots in one paginated query, for protocol-wide charts. The query already worked without it at runtime; only the type required it.
+
+### Fixed
+
+- **Amoy default RPC** — `rpc-amoy.polygon.technology` no longer resolves (DNS NXDOMAIN), so `Network.AMOY` without an explicit `rpcUrl` could not connect. The default is now `polygon-amoy-bor-rpc.publicnode.com`, the same provider already used for Polygon mainnet.
+
+### Changed
+
+- **`ethers` peer dependency raised to `^6.17.0`** — ethers 6.16 pulls a `ws` release with two high-severity advisories (GHSA-58qx-3vcg-4xpx, GHSA-96hv-2xvq-fx4p); 6.17 ships the fixed `ws`.
+- **Tooling updated to the latest stable releases** — vitest 5, tsup 9, TypeScript 6.0, ESLint 10.13, typescript-eslint 8.72, Prettier 3.9. `npm audit` reports 0 vulnerabilities. CI now runs on Node 22 (vitest 5 requires Node ≥ 22.12); the published package still supports Node ≥ 18.
+
+---
+
 ## [1.1.1] - 2026-04-07
 
 ### Added

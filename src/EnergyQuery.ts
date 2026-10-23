@@ -389,6 +389,7 @@ export class EnergyQuery {
       orderBy = "fromTimestamp",
       orderDirection = "asc",
       projectId,
+      projectIds,
       attester,
       replaced,
       fromTimestamp_gte,
@@ -400,6 +401,7 @@ export class EnergyQuery {
 
     const where: Record<string, unknown> = {};
     if (projectId !== undefined) where["project"] = projectId;
+    else if (projectIds !== undefined) where["project_in"] = projectIds;
     if (attester) where["attester"] = attester.toLowerCase();
     if (replaced !== undefined) where["replaced"] = replaced;
     if (fromTimestamp_gte) where["fromTimestamp_gte"] = fromTimestamp_gte;
@@ -466,7 +468,8 @@ export class EnergyQuery {
   async getDailySnapshots(filters: DailySnapshotFilters): Promise<SubgraphDailySnapshot[]> {
     const { projectId, dateFrom, dateTo, first = 365, skip = 0, orderDirection = "asc" } = filters;
 
-    const where: Record<string, unknown> = { project: projectId };
+    const where: Record<string, unknown> = {};
+    if (projectId !== undefined) where["project"] = projectId;
     if (dateFrom) where["date_gte"] = dateFrom;
     if (dateTo) where["date_lte"] = dateTo;
 
@@ -508,14 +511,17 @@ export class EnergyQuery {
   // Attesters
   // ---------------------------------------------------------------------------
 
-  /** Returns the list of attesters authorized for a specific project. */
+  /** Returns the attesters authorized for a project, or for several projects when given an array of ids. */
   async getProjectAttesters(
-    projectId: string,
+    projectId: string | string[],
     filters: AttesterFilters = {},
   ): Promise<SubgraphProjectAttester[]> {
     const { first = 100, skip = 0, active } = filters;
 
-    const where: Record<string, unknown> = { project: projectId };
+    // An array queries several projects in one request (project_in).
+    const where: Record<string, unknown> = Array.isArray(projectId)
+      ? { project_in: projectId }
+      : { project: projectId };
     if (active !== undefined) where["active"] = active;
 
     const data = await this.query<{

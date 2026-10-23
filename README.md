@@ -821,20 +821,21 @@ console.log(data.fromTimestamp); // 1700000000n
 
 #### `AttestationFilters`
 
-| Field               | Type                                                           | Default           |
-| ------------------- | -------------------------------------------------------------- | ----------------- |
-| `first`             | `number`                                                       | `100`             |
-| `skip`              | `number`                                                       | `0`               |
-| `orderBy`           | `"fromTimestamp" \| "blockTimestamp" \| "energyWh"`            | `"fromTimestamp"` |
-| `orderDirection`    | `"asc" \| "desc"`                                              | `"asc"`           |
-| `projectId`         | `string`                                                       | —                 |
-| `attester`          | `string`                                                       | —                 |
-| `replaced`          | `boolean` — `false` returns only active attestations           | —                 |
-| `fromTimestamp_gte` | `string` — Unix seconds                                        | —                 |
-| `fromTimestamp_lte` | `string` — Unix seconds                                        | —                 |
-| `toTimestamp_gte`   | `string` — Unix seconds                                        | —                 |
-| `toTimestamp_lte`   | `string` — Unix seconds                                        | —                 |
-| `energyTypeId`      | `string` — use `"0"` for consumer, `"1"`–`"13"` for generators | —                 |
+| Field               | Type                                                                 | Default           |
+| ------------------- | -------------------------------------------------------------------- | ----------------- |
+| `first`             | `number`                                                             | `100`             |
+| `skip`              | `number`                                                             | `0`               |
+| `orderBy`           | `"fromTimestamp" \| "blockTimestamp" \| "energyWh"`                  | `"fromTimestamp"` |
+| `orderDirection`    | `"asc" \| "desc"`                                                    | `"asc"`           |
+| `projectId`         | `string`                                                             | —                 |
+| `projectIds`        | `string[]` — several projects in one query; ignored with `projectId` | —                 |
+| `attester`          | `string`                                                             | —                 |
+| `replaced`          | `boolean` — `false` returns only active attestations                 | —                 |
+| `fromTimestamp_gte` | `string` — Unix seconds                                              | —                 |
+| `fromTimestamp_lte` | `string` — Unix seconds                                              | —                 |
+| `toTimestamp_gte`   | `string` — Unix seconds                                              | —                 |
+| `toTimestamp_lte`   | `string` — Unix seconds                                              | —                 |
+| `energyTypeId`      | `string` — use `"0"` for consumer, `"1"`–`"13"` for generators       | —                 |
 
 #### Daily Snapshots
 
@@ -845,21 +846,21 @@ console.log(data.fromTimestamp); // 1700000000n
 
 #### `DailySnapshotFilters`
 
-| Field            | Type                  | Default | Required |
-| ---------------- | --------------------- | ------- | -------- |
-| `projectId`      | `string`              | —       | Yes      |
-| `dateFrom`       | `string` (YYYY-MM-DD) | —       | No       |
-| `dateTo`         | `string` (YYYY-MM-DD) | —       | No       |
-| `first`          | `number`              | `365`   | No       |
-| `skip`           | `number`              | `0`     | No       |
-| `orderDirection` | `"asc" \| "desc"`     | `"asc"` | No       |
+| Field            | Type                              | Default | Required |
+| ---------------- | --------------------------------- | ------- | -------- |
+| `projectId`      | `string` — omit for every project | —       | No       |
+| `dateFrom`       | `string` (YYYY-MM-DD)             | —       | No       |
+| `dateTo`         | `string` (YYYY-MM-DD)             | —       | No       |
+| `first`          | `number`                          | `365`   | No       |
+| `skip`           | `number`                          | `0`     | No       |
+| `orderDirection` | `"asc" \| "desc"`                 | `"asc"` | No       |
 
 #### Attesters
 
-| Method                                     | Returns                     | Description                                 |
-| ------------------------------------------ | --------------------------- | ------------------------------------------- |
-| `getProjectAttesters(projectId, filters?)` | `SubgraphProjectAttester[]` | Attesters authorized for a specific project |
-| `getWatcherAttesters(watcherId, filters?)` | `SubgraphWatcherAttester[]` | Attesters authorized at the watcher level   |
+| Method                                     | Returns                     | Description                                                                                |
+| ------------------------------------------ | --------------------------- | ------------------------------------------------------------------------------------------ |
+| `getProjectAttesters(projectId, filters?)` | `SubgraphProjectAttester[]` | Attesters authorized for a project; pass an array of ids for several projects in one query |
+| `getWatcherAttesters(watcherId, filters?)` | `SubgraphWatcherAttester[]` | Attesters authorized at the watcher level                                                  |
 
 Both accept an optional `AttesterFilters` with `{ first?, skip?, active? }`.
 

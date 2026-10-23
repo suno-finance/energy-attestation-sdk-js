@@ -223,6 +223,11 @@ export interface AttestationFilters {
   orderDirection?: "asc" | "desc";
   /** Filter by project ID */
   projectId?: string;
+  /**
+   * Filter by several project IDs in one query (e.g. every project of a
+   * watcher). Ignored when `projectId` is set.
+   */
+  projectIds?: string[];
   /** Filter by attester address */
   attester?: string;
   /** Filter by replacement status. Use false to get only active attestations. */
@@ -244,8 +249,11 @@ export interface AttestationFilters {
 }
 
 export interface DailySnapshotFilters {
-  /** Project ID to query snapshots for */
-  projectId: string;
+  /**
+   * Project ID to query snapshots for. Omit it to get every project's
+   * snapshots in one query (e.g. protocol-wide charts), usually with a date range.
+   */
+  projectId?: string;
   /** Start date in YYYY-MM-DD format (inclusive) */
   dateFrom?: string;
   /** End date in YYYY-MM-DD format (inclusive) */

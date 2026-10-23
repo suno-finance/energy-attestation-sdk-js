@@ -646,6 +646,17 @@ describe("EnergyQuery", () => {
       const body = JSON.parse(fetch.mock.calls[0][1].body);
       expect(Object.keys(body.variables.where)).not.toContain("energyType");
     });
+
+    it("passes projectIds as a project_in filter", async () => {
+      const fetch = mockFetch({ energyAttestations: [] });
+      vi.stubGlobal("fetch", fetch);
+
+      await makeQuery().getAttestations({ projectIds: ["2", "3", "8"] });
+
+      const body = JSON.parse(fetch.mock.calls[0][1].body);
+      expect(body.variables.where).toMatchObject({ project_in: ["2", "3", "8"] });
+      expect(Object.keys(body.variables.where)).not.toContain("project");
+    });
   });
 
   // -------------------------------------------------------------------------
@@ -783,6 +794,16 @@ describe("EnergyQuery", () => {
       expect(body.variables.where).toMatchObject({ project: "7" });
     });
 
+    it("queries every project when projectId is omitted", async () => {
+      const fetch = mockFetch({ dailyEnergySnapshots: [] });
+      vi.stubGlobal("fetch", fetch);
+
+      await makeQuery().getDailySnapshots({ dateFrom: "2026-01-01" });
+
+      const body = JSON.parse(fetch.mock.calls[0][1].body);
+      expect(body.variables.where).toEqual({ date_gte: "2026-01-01" });
+    });
+
     it("passes dateFrom and dateTo filters", async () => {
       const fetch = mockFetch({ dailyEnergySnapshots: [] });
       vi.stubGlobal("fetch", fetch);
@@ -840,6 +861,16 @@ describe("EnergyQuery", () => {
 
       const body = JSON.parse(fetch.mock.calls[0][1].body);
       expect(body.variables.where).toMatchObject({ project: "3" });
+    });
+
+    it("queries several projects at once with an array of ids", async () => {
+      const fetch = mockFetch({ projectAttesters: [] });
+      vi.stubGlobal("fetch", fetch);
+
+      await makeQuery().getProjectAttesters(["2", "3"]);
+
+      const body = JSON.parse(fetch.mock.calls[0][1].body);
+      expect(body.variables.where).toEqual({ project_in: ["2", "3"] });
     });
 
     it("passes active filter", async () => {
