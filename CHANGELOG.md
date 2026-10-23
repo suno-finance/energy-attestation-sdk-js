@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Amoy default RPC** — `rpc-amoy.polygon.technology` no longer resolves (DNS NXDOMAIN), so `Network.AMOY` without an explicit `rpcUrl` could not connect. The default is now `polygon-amoy-bor-rpc.publicnode.com`, the same provider already used for Polygon mainnet.
+
 ### Changed
 
 - **`ethers` peer dependency raised to `^6.17.0`** — ethers 6.16 pulls a `ws` release with two high-severity advisories (GHSA-58qx-3vcg-4xpx, GHSA-96hv-2xvq-fx4p); 6.17 ships the fixed `ws`.
