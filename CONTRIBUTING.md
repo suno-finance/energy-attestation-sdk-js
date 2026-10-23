@@ -29,7 +29,7 @@ Thank you for your interest in contributing. This document covers everything you
 ### Setup
 
 ```bash
-git clone https://github.com/Suno-Finance/energy-attestation-sdk-js.git
+git clone https://github.com/suno-finance/energy-attestation-sdk-js.git
 cd energy-attestation-sdk-js
 npm install
 ```
@@ -166,7 +166,7 @@ describe("MyModule", () => {
 
 ## Reporting bugs
 
-Open a [GitHub issue](https://github.com/Suno-Finance/energy-attestation-sdk-js/issues) with:
+Open a [GitHub issue](https://github.com/suno-finance/energy-attestation-sdk-js/issues) with:
 
 - SDK version (`npm list energy-attestation-sdk`)
 - Node.js version (`node -v`)

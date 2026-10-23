@@ -45,10 +45,10 @@
   "homepage": "https://attest.energy",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Suno-Finance/energy-attestation-sdk-js"
+    "url": "git+https://github.com/suno-finance/energy-attestation-sdk-js.git"
   },
   "bugs": {
-    "url": "https://github.com/Suno-Finance/energy-attestation-sdk-js/issues"
+    "url": "https://github.com/suno-finance/energy-attestation-sdk-js/issues"
   },
   "sideEffects": false,
   "engines": {
